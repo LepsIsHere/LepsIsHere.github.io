@@ -1,1 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1: Prokudin-Gorskii Image Alignment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Project 1: Prokudin-Gorskii Image Alignment</h1>
+            <p class="author">Your Name Here</p>
+        </header>
 
+        <section>
+            <h2>Overview</h2>
+            <p>The goal of this project is to take the digitized glass plate negatives from Sergei Prokudin-Gorskii's collection and automatically produce a color photograph. Each negative consists of three grayscale exposures (Blue, Green, and Red) stacked vertically. The core task is to split these channels and align them to reconstruct the original color image.</p>
+        </section>
+
+        <section>
+            <h2>My Approach</h2>
+            <p>To align the channels, I implemented a multi-scale image pyramid algorithm. This coarse-to-fine approach is efficient, especially for the high-resolution <code>.tif</code> images. Here's a breakdown of the process:</p>
+            <ol>
+                <li><strong>Channel Splitting:</strong> The input image is divided into three equal vertical parts, corresponding to the Blue, Green, and Red channels.</li>
+                <li><strong>Image Pyramid Alignment:</strong> A recursive function builds an image pyramid for the B, G, and R channels. It finds the optimal displacement at the coarsest scale and progressively refines this estimate at finer scales. This avoids a prohibitively slow exhaustive search on the full-resolution image.</li>
+                <li><strong>Similarity Metric:</strong> The Sum of Squared Differences (SSD) is used to score how well two channels match at a given displacement. To improve accuracy, the metric is calculated on the central 60% of the image, ignoring the noisy borders.</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Bells & Whistles</h2>
+            <p>As a CS280A student, I implemented several enhancements to improve the final image quality:</p>
+            <ul>
+                <li><strong>Automatic Contrast:</strong> The image's intensity values are stretched to enhance visual contrast. This is done by mapping the 2nd and 98th percentiles of pixel brightness to black and white, respectively, which makes the adjustment robust to outlier pixels.</li>
+                <li><strong>Automatic White Balance:</strong> I used the "gray world" algorithm, which assumes the average color of a scene is gray. It scales the R, G, and B channels so their average intensities are equal, correcting for color casts.</li>
+                <li><strong>Automatic Cropping:</strong> To remove the distracting colored borders caused by misalignment, a simple 5% border is cropped from all sides of the final image.</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Results Gallery</h2>
+            <p>Below are the results of my algorithm on the provided dataset. All images are processed with the same set of parameters.</p>
+            
+            <div class="gallery">
+                <div class="result-item">
+                    <h3>cathedral.jpg</h3>
+                    <img src="output/cathedral_aligned.jpg" alt="Aligned image of a cathedral">
+                    <p><strong>Displacements:</strong> G(y,x) = (4, 1), R(y,x) = (10, 1)</p>
+                </div>
+                <div class="result-item">
+                    <h3>monastery.jpg</h3>
+                    <img src="output/monastery_aligned.jpg" alt="Aligned image of a monastery">
+                    <p><strong>Displacements:</strong> G(y,x) = (5, 2), R(y,x) = (11, 2)</p>
+                </div>
+                <div class="result-item">
+                    <h3>tobolsk.jpg</h3>
+                    <img src="output/tobolsk_aligned.jpg" alt="Aligned image of Tobolsk">
+                    <p><strong>Displacements:</strong> G(y,x) = (5, 2), R(y,x) = (12, 2)</p>
+                </div>
+                <div class="result-item">
+                    <h3>emir.tif</h3>
+                    <img src="output/emir_aligned.jpg" alt="Aligned image of the Emir of Bukhara">
+                    <p><strong>Displacements:</strong> G(y,x) = (52, 22), R(y,x) = (113, 22)</p>
+                </div>
+                </div>
+             <p><strong>Note:</strong> The displacement values above are examples. You must replace them with the actual output from your script.</p>
+        </section>
+    </div>
+</body>
+</html>
