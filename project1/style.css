@@ -1,0 +1,117 @@
+/* Dark, minimalist theme adapted from Project 0 */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+    margin: 0;
+    padding: 20px;
+    font-weight: 300;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+header {
+    text-align: center;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #333;
+    margin-bottom: 3rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.author {
+    font-size: 1.2rem;
+    color: #aaa;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    border-bottom: 1px solid #555; /* Muted border for dark theme */
+    padding-bottom: 0.5rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+p, li {
+    font-size: 1rem;
+    color: #bbb;
+}
+
+ol, ul {
+    padding-left: 25px;
+}
+
+code {
+    background-color: #2c2c2c;
+    color: #3498db;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* --- Styles adapted for Project 1 Gallery --- */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.result-item {
+    background-color: #1e1e1e; /* Darker card background */
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.result-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.result-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    border: 1px solid #444;
+}
+
+.result-item h3 {
+    margin-top: 0;
+    color: #3498db; /* A bright blue for contrast */
+    font-weight: 700;
+}
+
+.result-item p {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* --- JS Fade-in Animation from Project 0 --- */
+section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
